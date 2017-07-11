@@ -1,104 +1,104 @@
-	# Lines configured by zsh-newuser-install
-	HISTFILE=~/.histfile
-	HISTSIZE=1000
-	SAVEHIST=1000
-	setopt autocd extendedglob nomatch notify
-	unsetopt appendhistory beep
-	bindkey -e
-	# End of lines configured by zsh-newuser-install
-	# The following lines were added by compinstall
-	zstyle :compinstall filename '/home/jmxg/.zshrc'
-	zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
+# Lines configured by zsh-newuser-install
+HISTFILE=~/.histfile
+HISTSIZE=1000
+SAVEHIST=1000
+setopt autocd extendedglob nomatch notify
+unsetopt appendhistory beep
+bindkey -e
+# End of lines configured by zsh-newuser-install
+# The following lines were added by compinstall
+zstyle :compinstall filename '/home/jmxg/.zshrc'
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 
-	autoload -Uz compinit
-	compinit
-	# End of lines added by compinstall
-	autoload -U promptinit && promptinit
-	#prompt adam2
+autoload -Uz compinit
+compinit
+# End of lines added by compinstall
+autoload -U promptinit && promptinit
+#prompt adam2
 
-	# Set word boundary to Bash-style
-	autoload -U select-word-style
-	select-word-style bash
+# Set word boundary to Bash-style
+autoload -U select-word-style
+select-word-style bash
 
-	# Source profile
-	# source ~/.profile
+# Source profile
+# source ~/.profile
 
-	# Export location of slime directory for StumpWM
-	# if [ -e ~/.emacs.d/elpa ];
-	# then
-	#     export SLIME="$(ls ~/.emacs.d/elpa | grep slime)"
-	# fi
+# Export location of slime directory for StumpWM
+# if [ -e ~/.emacs.d/elpa ];
+# then
+#     export SLIME="$(ls ~/.emacs.d/elpa | grep slime)"
+# fi
 
-	# Aliases
-	alias ls="ls -G"
-	alias pg="$PAGER"
-	alias tmux="TERM=xterm-256color tmux"
-	alias root="sudo $SHELL"
-	alias temp="sysctl -a | grep temperature"
-	# alias temp="sensors"
-	alias multimonitor="xrandr --output HDMI1 --auto --left-of LVDS1"
-	alias py="python3"
-  alias xmessage="xmessage -geometry -0+0 -buttons ''"
-	alias transmission="transmission -er"
-  # alias at="primusrun ~/java/bin/java -jar ~/Downloads/AT/ATLauncher.jar"
-  alias touchpadtoggle="~/prog/sh/touchpadtoggle.sh"
-	alias t="tmux"
+# Aliases
+alias ls="ls -G"
+alias pg="$PAGER"
+alias tmux="TERM=xterm-256color tmux"
+alias root="sudo $SHELL"
+alias temp="sysctl -a | grep temperature"
+# alias temp="sensors"
+alias multimonitor="xrandr --output HDMI1 --auto --left-of LVDS1"
+alias py="python3"
+alias xmessage="xmessage -geometry -0+0 -buttons ''"
+alias transmission="transmission -er"
+# alias at="primusrun ~/java/bin/java -jar ~/Downloads/AT/ATLauncher.jar"
+alias touchpadtoggle="~/prog/sh/touchpadtoggle.sh"
+alias t="tmux"
 
-	# System aliases
-	alias poweroff="shutdown -p now"
-	alias reboot="shutdown -r now"
-	alias sd="shutdown -p now"
-	alias rb="shutdown -r now"
+# System aliases
+alias poweroff="shutdown -p now"
+alias reboot="shutdown -r now"
+alias sd="shutdown -p now"
+alias rb="shutdown -r now"
 
-	#alias top="top -s 1"
-	alias battery="sysctl -a | grep battery"
-	# alias battery="cat /sys/class/power_supply/BAT1/capacity"
+#alias top="top -s 1"
+alias battery="sysctl -a | grep battery"
+# alias battery="cat /sys/class/power_supply/BAT1/capacity"
 
-	# Emacs aliases
+# Emacs aliases
 #	alias ec="ec -t"
-	alias calc="emacs -nw -f full-calc"
+alias calc="emacs -nw -f full-calc"
 
-	# Pkg aliases
-	alias pkg="sudo pkg"
-	alias upkg="/usr/sbin/pkg"
-	alias pkgi="sudo pkg install"
-	alias pkgd="sudo pkg delete"
-	alias pkgu="sudo pkg upgrade"
-	alias pkgn="/usr/sbin/pkg info"
-	alias pkgs="/usr/sbin/pkg search"
+# Pkg aliases
+alias pkg="sudo pkg"
+alias upkg="/usr/sbin/pkg"
+alias pkgi="sudo pkg install"
+alias pkgd="sudo pkg delete"
+alias pkgu="sudo pkg upgrade"
+alias pkgn="/usr/sbin/pkg info"
+alias pkgs="/usr/sbin/pkg search"
 
-  alias pm="portmaster"
-  alias spm="sudo portmaster"
+alias pm="portmaster"
+alias spm="sudo portmaster"
 
-  # ZFS aliases
-  alias snapshot="sudo zfs snapshot -r zroot/ROOT@`date +%Y%m%d%H%M`"
+# ZFS aliases
+alias snapshot="sudo zfs snapshot -r zroot/ROOT@`date +%Y%m%d%H%M`"
 
-	# Pkg alias
-	# alias pkg-install-func='pkg install'
-	# pkg-install-func() {
-	# sudo pkg $*
-	#}
+# Pkg alias
+# alias pkg-install-func='pkg install'
+# pkg-install-func() {
+# sudo pkg $*
+#}
 
-	# Pacman alias
-	#alias pacman='yaourt'
+# Pacman alias
+#alias pacman='yaourt'
 
-	# Colored man pages
-	man() {
-	    env LESS_TERMCAP_mb=$'\E[01;31m' \
-	    LESS_TERMCAP_md=$'\E[01;38;5;74m' \
-	    LESS_TERMCAP_me=$'\E[0m' \
-	    LESS_TERMCAP_se=$'\E[0m' \
-	    LESS_TERMCAP_so=$'\E[38;5;246m' \
-	    LESS_TERMCAP_ue=$'\E[0m' \
-	    LESS_TERMCAP_us=$'\E[04;38;5;146m' \
-	    man "$@"
-	}
+# Colored man pages
+man() {
+env LESS_TERMCAP_mb=$'\E[01;31m' \
+LESS_TERMCAP_md=$'\E[01;38;5;74m' \
+LESS_TERMCAP_me=$'\E[0m' \
+LESS_TERMCAP_se=$'\E[0m' \
+LESS_TERMCAP_so=$'\E[38;5;246m' \
+LESS_TERMCAP_ue=$'\E[0m' \
+LESS_TERMCAP_us=$'\E[04;38;5;146m' \
+man "$@"
+}
 
-	# Added by "perl Build installdeps" run in the FvwmPiazza directory, which may or may not be relevant
-	PERL_MB_OPT="--install_base \"/home/jmxg/perl5\""; export PERL_MB_OPT;
-	PERL_MM_OPT="INSTALL_BASE=/home/jmxg/perl5"; export PERL_MM_OPT;
+# Added by "perl Build installdeps" run in the FvwmPiazza directory, which may or may not be relevant
+PERL_MB_OPT="--install_base \"/home/jmxg/perl5\""; export PERL_MB_OPT;
+PERL_MM_OPT="INSTALL_BASE=/home/jmxg/perl5"; export PERL_MM_OPT;
 
-	# My keybindings
-	bindkey "[33~" backward-kill-word
-	bindkey "^[[B" history-beginning-search-forward # Up arrow
-	bindkey "^[[A" history-beginning-search-backward # Down arrow
+# My keybindings
+bindkey "[33~" backward-kill-word
+bindkey "^[[B" history-beginning-search-forward # Up arrow
+bindkey "^[[A" history-beginning-search-backward # Down arrow
