@@ -101,6 +101,6 @@ export LC_MEASUREMENT="en_US.UTF-8"
 export LC_IDENTIFICATION="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
 
-source ~/.zshrc.pre-oh-my-zsh
+source ~jmxg/.zshrc.pre-oh-my-zsh
 
 # Locale information to fix characters not showing up.

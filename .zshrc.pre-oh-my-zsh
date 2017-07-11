@@ -42,11 +42,12 @@
 	alias transmission="transmission -er"
   # alias at="primusrun ~/java/bin/java -jar ~/Downloads/AT/ATLauncher.jar"
   alias touchpadtoggle="~/prog/sh/touchpadtoggle.sh"
+	alias t="tmux"
 
 	# System aliases
-	alias poweroff="shutdown -h now"
+	alias poweroff="shutdown -p now"
 	alias reboot="shutdown -r now"
-	alias sd="shutdown -h now"
+	alias sd="shutdown -p now"
 	alias rb="shutdown -r now"
 
 	#alias top="top -s 1"
