@@ -1,0 +1,48 @@
+" -*- comment-start: "\"" -*-
+" C-g as cancel (C-q is stop)
+cmap <C-g> <Esc>
+imap <C-g> <Esc>
+noremap <C-g> <Esc>
+
+" Avoid Find dialog when canceling a started command, C-x C-g
+noremap <C-x><C-g> <Esc>
+
+" Avoid quit on C-q, it's more suitable for Stop here
+noremap <c-q> :stop<cr>
+
+" Use C-s and C-r for searching (n/N for next/prev as in less)
+noremap <C-s> /
+noremap <C-r> ?
+
+" Copy the current URL to the clipboard with M-w
+noremap <A-w> y
+
+" Copy selected text to the clipboard with C-w
+" noremap <C-w> Y
+
+" Paste the current clipboard selection to a new buffer with C-y
+noremap <C-y> P
+
+" Make D act as d so I don't accidentally delete buffers
+
+" Make d and u act as C-d and C-u
+noremap d <C-d>
+noremap u <C-u>
+
+" Make h and l, and x and c switch to tab on left or right
+noremap h <C-p>
+noremap l <C-n>
+noremap x <C-p>
+noremap c <C-n>
+
+" Make e open hint in new tab
+noremap e F
+
+" Zoom with = instead of just +
+noremap = +
+
+" Change hinting characters
+set hintchars=hjklasdfgyuiopqwertnmzxcvb
+
+" Ignore keys on Reddit
+ignorekeys add -except=xc https://reddit\\.com/
