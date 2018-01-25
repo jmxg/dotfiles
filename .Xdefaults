@@ -3,6 +3,8 @@ URxvt.background: #000000
 URxvt.foreground: #ffffff
 URxvt.font: xft:Deja Vu Sans Mono:size=14
 URxvt.boldFont: xft:Deja Vu Sans Mono:bold:size=14
+! URxvt.font: xft:Deja Vu Sans Mono:size=16
+! URxvt.boldFont: xft:Deja Vu Sans Mono:bold:size=16
 URxvt.keysym.C-BackSpace: \033[33~
 
 ! URxvt.perl-ext-common: ...,keyboard-select

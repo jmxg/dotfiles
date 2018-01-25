@@ -68,18 +68,18 @@ values."
    ;; packages then consider to create a layer, you can also put the
    ;; configuration in `dotspacemacs/user-config'.
    dotspacemacs-additional-packages '(dictionary yasnippet-snippets))
-   ;; A list of packages that cannot be updated.
-   dotspacemacs-frozen-packages '()
-   ;; A list of packages that will not be installed and loaded.
-   dotspacemacs-excluded-packages '(adaptive-wrap)
-   ;; Defines the behaviour of Spacemacs when installing packages.
-   ;; Possible values are `used-only', `used-but-keep-unused' and `all'.
-   ;; `used-only' installs only explicitly used packages and uninstall any
-   ;; unused packages as well as their unused dependencies.
-   ;; `used-but-keep-unused' installs only the used packages but won't uninstall
-   ;; them if they become unused. `all' installs *all* packages supported by
-   ;; Spacemacs and never uninstall them. (default is `used-only')
-   dotspacemacs-install-packages 'used-only)
+  ;; A list of packages that cannot be updated.
+  dotspacemacs-frozen-packages '()
+  ;; A list of packages that will not be installed and loaded.
+  dotspacemacs-excluded-packages '(adaptive-wrap)
+  ;; Defines the behaviour of Spacemacs when installing packages.
+  ;; Possible values are `used-only', `used-but-keep-unused' and `all'.
+  ;; `used-only' installs only explicitly used packages and uninstall any
+  ;; unused packages as well as their unused dependencies.
+  ;; `used-but-keep-unused' installs only the used packages but won't uninstall
+  ;; them if they become unused. `all' installs *all* packages supported by
+  ;; Spacemacs and never uninstall them. (default is `used-only')
+  dotspacemacs-install-packages 'used-only)
 
 (defun dotspacemacs/init ()
   "Initialization function.
@@ -367,6 +367,7 @@ layers configuration. You are free to put any user code."
 
   ;; Evil settings
   (evil-global-set-key 'normal "\\" 'evil-end-of-line)
+  (evil-global-set-key 'visual "\\" 'evil-end-of-line)
   (evil-global-set-key 'normal "s" 'evil-append-line)
   (evil-global-set-key 'normal "\M-v" 'mark-whole-buffer)
   (evil-global-set-key 'normal "'" 'evil-repeat-find-char)
@@ -404,7 +405,7 @@ layers configuration. You are free to put any user code."
     ;; (define-key spacemacs/paste-transient-state/keymap "p" 'spacemacs/paste-transient-state/evil-paste-pop)
     ;; (define-key spacemacs/paste-transient-state/keymap "P" 'spacemacs/paste-transient-state/evil-paste-pop-next)
     ;; (define-key spacemacs/paste-transient-state/keymap (kbd "C-p") 'spacemacs/paste-transient-state/evil-paste-after)
-  )
+    )
 
   ;; Frame settings
   (add-to-list 'initial-frame-alist '(fullscreen . maximized))
@@ -583,7 +584,7 @@ layers configuration. You are free to put any user code."
   ;;  Org settings
   (setq org-directory "~/org")
   (setq org-agenda-files
-        '("~/org/journal.org" "~/org/oldgtd.org" "~/org/gtd.org" "~/org/class/fall-2015.org" "~/org/vision.org" "~/Dropbox/orgzly/mobile.org"))
+        '("~/org/journal.org" "~/org/gtd.org" "~/Dropbox/orgzly/mobile.org"))
   (setq org-startup-indented t)
   (setq org-agenda-repeating-timestamp-show-all nil)
   (add-hook 'org-agenda-mode-hook
@@ -708,72 +709,78 @@ layers configuration. You are free to put any user code."
           ("TODO" (:foreground "red" :weight bold :box (:line-width 2 :color "red" :style released-button)))
           ("DONE" (:foreground "green" :weight bold :box (:line-width 2 :color "green" :style released-button)))
           ("NEXT" (:foreground "orange" :weight bold :box (:line-width 2 :color "orange" :style released-button)))
-            ("PROJECT" (:foreground "blue" :weight bold :box (:line-width 2 :color "blue" :style released-button)))
-            ("STARTED" (:foreground "lightblue" :weight bold :box (:line-width 2 :color "lightblue" :style released-button)))
-            ("SOMEDAY/MAYBE" (:foreground "purple" :weight bold :box (:line-width 2 :color "purple" :style released-button)))
-            ))
+          ("PROJECT" (:foreground "blue" :weight bold :box (:line-width 2 :color "blue" :style released-button)))
+          ("STARTED" (:foreground "lightblue" :weight bold :box (:line-width 2 :color "lightblue" :style released-button)))
+          ("SOMEDAY/MAYBE" (:foreground "purple" :weight bold :box (:line-width 2 :color "purple" :style released-button)))
+          ))
 
-    ;; Org Capture
-    ;; Functions to return today and tomorrow's dates
-    (defun date-today ()
-      (interactive)
-      (format-time-string "%Y-%m-%d %A" (current-time)))
-    (defun date-tomorrow ()
-      (interactive)
-      (format-time-string "%Y-%m-%d %A" (list (1+ (car (current-time))) (cadr (current-time)))))
+  ;; Org Capture
+  ;; Functions to return today and tomorrow's dates
+  (require 'org-expiry)
+  (setq
+   org-expiry-created-property-name "CREATED" ; Name of property when an item is created
+   org-expiry-inactive-timestamps   t         ; Don't have everything in the agenda view
+   )
+  (org-expiry-insinuate)
+  (defun date-today ()
+    (interactive)
+    (format-time-string "%Y-%m-%d %A" (current-time)))
+  (defun date-tomorrow ()
+    (interactive)
+    (format-time-string "%Y-%m-%d %A" (list (1+ (car (current-time))) (cadr (current-time)))))
 
-    ;; Capture templates
-    (setq org-capture-templates
-          '(("c" "Journal" entry (file+olp+datetree "~/org/journal.org")
-            "* %?\n%U\n")
-            ("e" "Task" entry (file+olp+datetree "~/Dropbox/orgzly/mobile.org")
-            "* %?\n%U\n")
-            ("s" "Study" entry (file+olp+datetree "~/org/study.org")
-            "* %?\n%U\n")
-            ;; ("i" "Ideas" entry (file+headline "~/org/gtd.org" "Ideas")
-            ;;  "* %?%U\n\n")
-            )
+  ;; Capture templates
+  (setq org-capture-templates
+        '(("c" "Journal" entry (file+olp+datetree "~/org/journal.org")
+           "* %?\n%U\n")
+          ("e" "Task" entry (file+olp+datetree "~/Dropbox/orgzly/mobile.org")
+           "* %?\n%U\n")
+          ("s" "Study" entry (file+olp+datetree "~/org/study.org")
+           "* %?\n%U\n")
+          ;; ("i" "Ideas" entry (file+headline "~/org/gtd.org" "Ideas")
+          ;;  "* %?%U\n\n")
           )
+        )
 
-    ;; (defun org-goto-capture (arg)
-    ;;   "Switch buffer to CAPTURE-journal.org, switch to CAPTURE-n-journal.org with prefix argument, or create a journal buffer if one is not already present."
-    ;;   (interactive "p")
-    ;;   (cond ((eq arg 1)
-    ;;          (if (get-buffer "CAPTURE-journal.org")
-    ;;              (switch-to-buffer "CAPTURE-journal.org")
-    ;;            (org-capture nil "c")))
-    ;;         ((not (eq arg 1))
-    ;;          (if (get-buffer (concat "CAPTURE-" (number-to-string arg) "-journal.org"))
-    ;;              (switch-to-buffer (concat "CAPTURE-" (number-to-string arg) "-journal.org"))
-    ;;            (org-capture nil "c")))))
-    (defun org-goto-capture (arg &optional char)
-      "Switch buffer to CAPTURE-journal.org, switch to CAPTURE-n-journal.org with prefix argument, or create a journal buffer if one is not already present."
-      (interactive "p")
-      (cond ((eq arg 1)
-            (let ((buf-name "CAPTURE-journal.org"))
-              (if (get-buffer buf-name)
-                  (switch-to-buffer buf-name)
-                (org-capture nil char))
-              (if (> (frame-height) 32)
-                  (delete-other-windows))))
-            ((not (eq arg 1))
-              (let ((buf-name (concat "CAPTURE-" (number-to-string arg) "-journal.org")))
-                (if (get-buffer buf-name)
-                    (switch-to-buffer buf-name)
-                  (org-capture nil char))
-                (if (> (frame-height) 32)
-                    (delete-other-windows))))))
+  ;; (defun org-goto-capture (arg)
+  ;;   "Switch buffer to CAPTURE-journal.org, switch to CAPTURE-n-journal.org with prefix argument, or create a journal buffer if one is not already present."
+  ;;   (interactive "p")
+  ;;   (cond ((eq arg 1)
+  ;;          (if (get-buffer "CAPTURE-journal.org")
+  ;;              (switch-to-buffer "CAPTURE-journal.org")
+  ;;            (org-capture nil "c")))
+  ;;         ((not (eq arg 1))
+  ;;          (if (get-buffer (concat "CAPTURE-" (number-to-string arg) "-journal.org"))
+  ;;              (switch-to-buffer (concat "CAPTURE-" (number-to-string arg) "-journal.org"))
+  ;;            (org-capture nil "c")))))
+  (defun org-goto-capture (arg &optional char)
+    "Switch buffer to CAPTURE-journal.org, switch to CAPTURE-n-journal.org with prefix argument, or create a journal buffer if one is not already present."
+    (interactive "p")
+    (cond ((eq arg 1)
+           (let ((buf-name "CAPTURE-journal.org"))
+             (if (get-buffer buf-name)
+                 (switch-to-buffer buf-name)
+               (org-capture nil char))
+             (if (> (frame-height) 32)
+                 (delete-other-windows))))
+          ((not (eq arg 1))
+           (let ((buf-name (concat "CAPTURE-" (number-to-string arg) "-journal.org")))
+             (if (get-buffer buf-name)
+                 (switch-to-buffer buf-name)
+               (org-capture nil char))
+             (if (> (frame-height) 32)
+                 (delete-other-windows))))))
 
-    (defun org-goto-capture-small (arg)
-      (interactive "p")
-      (if (eq (length (window-list)) 1)
-          (progn (split-window-below)
-                (other-window 1)
-                (org-goto-capture arg)
-                (shrink-window 12))))
+  (defun org-goto-capture-small (arg)
+    (interactive "p")
+    (if (eq (length (window-list)) 1)
+        (progn (split-window-below)
+               (other-window 1)
+               (org-goto-capture arg)
+               (shrink-window 12))))
 
-                                          ; Must change all 'org-goto-capture to include char argument
-    ;; (global-set-key (kbd "C-c j") 'org-goto-capture)
+                                        ; Must change all 'org-goto-capture to include char argument
+  ;; (global-set-key (kbd "C-c j") 'org-goto-capture)
   (global-set-key (kbd "C-c j") (lambda () (interactive) (org-goto-capture 1 "c")))
   ;; (spacemacs/set-leader-keys "da" 'org-goto-capture)
   (spacemacs/set-leader-keys "ow" (lambda () (interactive) (org-goto-capture 1 "c")))
@@ -799,8 +806,13 @@ layers configuration. You are free to put any user code."
       (newline 2)
       (insert (format-time-string "[%Y-%m-%d %a %H:%M]"))))
 
+  ;; Capture bindings
   (add-hook 'org-capture-mode-hook
             (lambda () (define-key org-capture-mode-map (kbd "<C-S-return>") 'org-time-stamp-inactive-no-prompt)))
+  (add-hook 'org-capture-mode-hook
+            (lambda () (define-key org-capture-mode-map (kbd "<C-S-return>") 'org-time-stamp-inactive-no-prompt)))
+  (spacemacs/set-leader-keys "ma" 'org-capture-kill)
+  (spacemacs/set-leader-keys-for-major-mode 'org-mode "a" org-capture-kill)
 
   ;; Org tables
 
