@@ -9,4 +9,4 @@ keycode 50 = ISO_Level2_Latch
 keycode 62 = ISO_Level2_Latch
 keycode 255 = F30
 keycode 254 = F31
-keycode 253 = F32
+keycode 253 = F33
